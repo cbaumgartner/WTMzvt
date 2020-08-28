@@ -1,0 +1,557 @@
+2017-07-24 11:17:33,427 INFO  [ePay] 
+
+
+
+
+========================================
+	START LOGGING 
+
+	log4j config file: 'C:\Programmierung\ZVT\_ZVT\LUIS_ePayment.xml'
+========================================
+
+2017-07-24 11:17:33,505 INFO  [ePay] 
+
+
+
+
+========================================
+	START LOGGING 
+
+	log4j config file: 'C:\Programmierung\ZVT\_ZVT\LUIS_ePayment.xml'
+========================================
+
+2017-07-24 11:17:33,521 INFO  [ePay] ++++++++++ PayConfiguration ++++++++++
+TERMINAL
+   ID .....................: 69190887
+   device .................: H5000
+      connector to PC .....: LAN
+         protocol .........: ZVT
+      connectors ..........: 
+         RS232
+            COM port ......: COM9
+            baudrate ......: 9600
+            data bits .....: 8
+            parity ........: N
+            stop bits .....: 2.0
+         USB
+            vendor ID .....: 0
+            product ID ....: 0
+            endpoint read .: 0
+            endpoint write.: 0
+         LAN
+            local IP ......: 192.168.0.57
+            local port ....: 20007
+            subnetMask ....: 255.255.255.0
+            gateway IP ....: 192.168.0.233
+   card reader connection .: Controller
+   pinpad connection ......: Controller
+   use internal printer ...: true
+   allowed cards ..........: 0x60
+PROVIDER
+   network connector.... ..: LAN
+   ISDN
+      1.Phone .............: 221534660
+      1.Datex/P ...........: 221534660
+      2.Phone .............: 221534660
+      2.Datex/P ...........: 221534660
+      phone prefix ........: 0
+   LAN
+      1.IP ................: 17.111.131.52
+      1.Port ..............: 500
+      2.IP ................: 217.111.131.52
+      2.Port ..............: 500
+FILES
+   config file ............: zvtLANH5000.cfg
+   license file ...........: prosoft.lic
+   log4j config file ......: LUIS_ePayment.xml
+   merchant journal .......: ./haendlerjournal.log [not encrypted]
+   pin blacklist ..........: ../etc/blacklist.cfg
+PIN
+   merchant PIN ...........: WXQTpooUGXikgkHGKEW7hkOILBpdsDnuQfLAogyypEKbZg/MESes0JnI3uZsd4mqJRDMvh8S8sjpnUU+n7COV3tWZwmbIsmcdGh7j5s7ezkrxhum2R/8x6/bPxQ6rsye5uR4ruTz1TPqztRuTxA8GpkJqjjrtKy9hi2rs7JDISI=
+   service PIN ............: t73xM/hxvcNoIUYdLqaT6HXh8VMTYANb/kGYkj92NoWPLUFzeHSvk0zVNTyplryzblQUO1I1aKHbpbrEkERvuhDu9bP+0V8uSz5cbotRZZxvlK2s/nLxnNoykz1whU4jeYLkFhYKtGDNc8BZa3uso4n9Xyz/B/JkbP30E/G3B/k=
+   max PIN tries ..........: 3
+TIMING
+   timeout ................: 45 sec
+   timeout ISO layer ......: 65 sec
+   time to show texts .....: 3 sec
+DISPLAY
+   messages ...............: true
+   language ...............: de
+   allow administration ...: false
+TEST
+   simulation .............: false
+   merchant data 1 ........: 
+   merchant data 2 ........: 
+   merchant data 3 ........: 
+   merchant data 4 ........: 
+   merchant data 5 ........: 
+---------- PayConfiguration ----------
+
+2017-07-24 11:17:33,537 INFO  [ePay]  ==> PaySession.login(69190887)		[5.10.1510.30]
+2017-07-24 11:17:33,724 DEBUG [ePay] 		response timeout = 65sec
+2017-07-24 11:17:33,740 DEBUG [ePay] 	new ZVTEFTDevice
+2017-07-24 11:17:33,740 DEBUG [ePay] 	new ARTEMAEFTDevice
+2017-07-24 11:17:33,740 DEBUG [ePay] 	new ZVTTransaction
+2017-07-24 11:17:33,740 INFO  [ePay]  ==> PayTerminal.login()		[5.10.1510.30]
+2017-07-24 11:17:33,740 INFO  [ePay] 	Driver: access granted
+2017-07-24 11:17:33,740 DEBUG [ePay] 		EventQueue created
+2017-07-24 11:17:33,740 DEBUG [ePay] 		EventQueue starting...
+2017-07-24 11:17:33,740 DEBUG [ePay] 		EventQueue ...started
+2017-07-24 11:17:33,865 INFO  [ePay] 	-->TCP: open(192.168.0.57:20007)
+2017-07-24 11:17:55,116 ERROR [ePay] CommunicationException: ISO-library error. Detail: java.net.ConnectException: Connection timed out: connect (errorID=13)
+
+2017-07-24 11:17:55,116 DEBUG [ePay] 		EventQueue stopping...
+2017-07-24 11:17:55,116 INFO  [ePay] 	Driver: access released
+2017-07-24 11:17:55,116 DEBUG [ePay] 		EventQueue ...stopped.
+2017-07-24 11:17:55,116 ERROR [ePay] CommunicationException: ISO-library error. Detail: java.net.ConnectException: Connection timed out: connect (errorID=13)
+
+2017-07-24 11:17:55,116 INFO  [ePay]  <== PayTerminal.login()
+2017-07-24 11:17:55,116 ERROR [ePay] CommunicationException: ISO-library error. Detail: java.net.ConnectException: Connection timed out: connect (errorID=13)
+
+2017-07-24 11:17:55,116 INFO  [ePay]  <== PaySession.login(69190887)
+2017-07-24 11:31:38,867 INFO  [ePay] 
+
+
+
+
+========================================
+	START LOGGING 
+
+	log4j config file: 'C:\Programmierung\ZVT\_ZVT\LUIS_ePayment.xml'
+========================================
+
+2017-07-24 11:31:38,945 INFO  [ePay] 
+
+
+
+
+========================================
+	START LOGGING 
+
+	log4j config file: 'C:\Programmierung\ZVT\_ZVT\LUIS_ePayment.xml'
+========================================
+
+2017-07-24 11:31:38,961 INFO  [ePay] ++++++++++ PayConfiguration ++++++++++
+TERMINAL
+   ID .....................: 69190887
+   device .................: H5000
+      connector to PC .....: LAN
+         protocol .........: ZVT
+      connectors ..........: 
+         RS232
+            COM port ......: COM9
+            baudrate ......: 9600
+            data bits .....: 8
+            parity ........: N
+            stop bits .....: 2.0
+         USB
+            vendor ID .....: 0
+            product ID ....: 0
+            endpoint read .: 0
+            endpoint write.: 0
+         LAN
+            local IP ......: 192.168.0.57
+            local port ....: 20007
+            subnetMask ....: 255.255.255.0
+            gateway IP ....: 192.168.0.233
+   card reader connection .: Controller
+   pinpad connection ......: Controller
+   use internal printer ...: true
+   allowed cards ..........: 0x60
+PROVIDER
+   network connector.... ..: LAN
+   ISDN
+      1.Phone .............: 221534660
+      1.Datex/P ...........: 221534660
+      2.Phone .............: 221534660
+      2.Datex/P ...........: 221534660
+      phone prefix ........: 0
+   LAN
+      1.IP ................: 17.111.131.52
+      1.Port ..............: 500
+      2.IP ................: 217.111.131.52
+      2.Port ..............: 500
+FILES
+   config file ............: zvtLANH5000.cfg
+   license file ...........: prosoft.lic
+   log4j config file ......: LUIS_ePayment.xml
+   merchant journal .......: ./haendlerjournal.log [not encrypted]
+   pin blacklist ..........: ../etc/blacklist.cfg
+PIN
+   merchant PIN ...........: WXQTpooUGXikgkHGKEW7hkOILBpdsDnuQfLAogyypEKbZg/MESes0JnI3uZsd4mqJRDMvh8S8sjpnUU+n7COV3tWZwmbIsmcdGh7j5s7ezkrxhum2R/8x6/bPxQ6rsye5uR4ruTz1TPqztRuTxA8GpkJqjjrtKy9hi2rs7JDISI=
+   service PIN ............: t73xM/hxvcNoIUYdLqaT6HXh8VMTYANb/kGYkj92NoWPLUFzeHSvk0zVNTyplryzblQUO1I1aKHbpbrEkERvuhDu9bP+0V8uSz5cbotRZZxvlK2s/nLxnNoykz1whU4jeYLkFhYKtGDNc8BZa3uso4n9Xyz/B/JkbP30E/G3B/k=
+   max PIN tries ..........: 3
+TIMING
+   timeout ................: 45 sec
+   timeout ISO layer ......: 65 sec
+   time to show texts .....: 3 sec
+DISPLAY
+   messages ...............: true
+   language ...............: de
+   allow administration ...: false
+TEST
+   simulation .............: false
+   merchant data 1 ........: 
+   merchant data 2 ........: 
+   merchant data 3 ........: 
+   merchant data 4 ........: 
+   merchant data 5 ........: 
+---------- PayConfiguration ----------
+
+2017-07-24 11:31:38,976 INFO  [ePay]  ==> PaySession.login(69190887)		[5.10.1510.30]
+2017-07-24 11:31:39,179 DEBUG [ePay] 		response timeout = 65sec
+2017-07-24 11:31:39,179 DEBUG [ePay] 	new ZVTEFTDevice
+2017-07-24 11:31:39,179 DEBUG [ePay] 	new ARTEMAEFTDevice
+2017-07-24 11:31:39,179 DEBUG [ePay] 	new ZVTTransaction
+2017-07-24 11:31:39,195 INFO  [ePay]  ==> PayTerminal.login()		[5.10.1510.30]
+2017-07-24 11:31:39,195 INFO  [ePay] 	Driver: access granted
+2017-07-24 11:31:39,195 DEBUG [ePay] 		EventQueue created
+2017-07-24 11:31:39,195 DEBUG [ePay] 		EventQueue starting...
+2017-07-24 11:31:39,195 DEBUG [ePay] 		EventQueue ...started
+2017-07-24 11:31:39,304 INFO  [ePay] 	-->TCP: open(192.168.0.57:20007)
+2017-07-24 11:31:39,820 INFO  [ePay] 		ePay:/192.168.0.65:62364 --> H5000:/192.168.0.57:20007 established
+2017-07-24 11:31:39,836 DEBUG [ePay] 			<- charset=IBM437
+2017-07-24 11:31:40,133 DEBUG [ePay] 		response timeout = 65sec
+2017-07-24 11:31:40,148 INFO  [ePay] 	-->EFT: [69190887] anmeldung()
+2017-07-24 11:31:40,148 DEBUG [ePay] 			-> useInternalPrinter=true
+2017-07-24 11:31:40,148 DEBUG [ePay] 			-> allowAdministration=false
+2017-07-24 11:31:40,148 DEBUG [ePay] 			-> currency=0x978
+2017-07-24 11:31:40,148 DEBUG [ePay] 			-> chars/line=24
+2017-07-24 11:31:40,148 DEBUG [ePay] 			-> charset=ISO8859-1
+2017-07-24 11:31:40,148 DEBUG [ePay] 			-> cardDataDuringAuthorisation=true
+2017-07-24 11:31:40,148 DEBUG [ePay] 		response timeout = 5sec
+2017-07-24 11:31:40,164 DEBUG [ePay] 		-->TCP: 06:00:23:00:00:00:b8:09:78:06:1b:12:01:24:27:03:14:01:01:26:08:0a:02:06:d1:0a:02:06:d3:1f:04:02:f0:80:1f:05:01:80:
+2017-07-24 11:31:40,289 DEBUG [ePay] 		<--TCP: 80:00:00:
+2017-07-24 11:31:40,289 DEBUG [ePay] 		response timeout = 65sec
+2017-07-24 11:31:40,289 INFO  [ePay] 	<--EFT: [69190887] ok
+2017-07-24 11:31:40,336 DEBUG [ePay] 		<--TCP: 06:0f:14:19:00:29:69:19:08:87:49:09:78:06:08:27:03:14:01:01:12:01:24:
+2017-07-24 11:31:40,336 INFO  [ePay] 	<--EFT: [69190887] completion
+2017-07-24 11:31:40,336 DEBUG [ePay] 			inform PrintMessageHandler
+2017-07-24 11:31:40,336 INFO  [ePay] <==EVENT finalMsg: 23 chars
+2017-07-24 11:31:40,351 DEBUG [ePay] 			<- paymentType=0
+2017-07-24 11:31:40,351 DEBUG [ePay] 			<- tid=69190887
+2017-07-24 11:31:40,351 DEBUG [ePay] 			<- currency=0978
+2017-07-24 11:31:40,367 DEBUG [ePay] 			<- charset=ISO_8859-1
+2017-07-24 11:31:40,367 DEBUG [ePay] 			<- printerLineLength=24
+2017-07-24 11:31:40,367 INFO  [ePay] 	-->EFT: [69190887] ack
+2017-07-24 11:31:40,367 DEBUG [ePay] 		-->TCP: 80:00:00:
+2017-07-24 11:31:40,367 DEBUG [ePay] 			<- device charset=ISO_8859-1
+2017-07-24 11:31:40,367 DEBUG [ePay] 			<- Ai-Bit=0x0
+2017-07-24 11:31:40,367 INFO  [ePay] 	-->TCP: close()
+2017-07-24 11:31:40,367 DEBUG [ePay] 		EventQueue stopping...
+2017-07-24 11:31:40,367 INFO  [ePay] 	Driver: access released
+2017-07-24 11:31:40,367 DEBUG [ePay] 		EventQueue ...stopped.
+2017-07-24 11:31:40,367 INFO  [ePay]  <== PayTerminal.login()
+2017-07-24 11:31:40,383 INFO  [ePay]  <== PaySession.login(69190887): de.luis.kioskComponents.ePayment.t@3a09021
+2017-07-24 11:31:40,383 INFO  [ePay]  ==> PayTerminal.payment(1, 0, productCategories={})		[5.10.1510.30]
+2017-07-24 11:31:40,383 INFO  [ePay] 	Driver: access granted
+2017-07-24 11:31:40,383 DEBUG [ePay] 		EventQueue starting...
+2017-07-24 11:31:40,383 DEBUG [ePay] 		EventQueue ...started
+2017-07-24 11:31:40,492 INFO  [ePay] 	-->TCP: open(192.168.0.57:20007)
+2017-07-24 11:31:40,492 INFO  [ePay] 		ePay:/192.168.0.65:62365 --> H5000:/192.168.0.57:20007 established
+2017-07-24 11:31:40,492 DEBUG [ePay] 			<- charset=ISO_8859-1
+2017-07-24 11:31:40,508 INFO  [ePay] 			goodsIssueStatus: IDLE --> IDLE
+2017-07-24 11:31:40,508 INFO  [ePay] 	-->EFT: [69190887] autorisierung(automatic)
+2017-07-24 11:31:40,539 DEBUG [ePay] 			-> cents=1
+2017-07-24 11:31:40,539 DEBUG [ePay] 			-> currency=0x978
+2017-07-24 11:31:40,539 DEBUG [ePay] 			-> paymentType=68
+2017-07-24 11:31:40,539 DEBUG [ePay] 			-> cardTimeout=30
+2017-07-24 11:31:40,539 DEBUG [ePay] 			-> cardReadingControl=send card identifier
+2017-07-24 11:31:40,539 DEBUG [ePay] 		response timeout = 5sec
+2017-07-24 11:31:40,539 DEBUG [ePay] 		-->TCP: 06:01:14:04:00:00:00:00:00:01:49:09:78:19:44:01:1e:06:04:1f:15:01:80:
+2017-07-24 11:31:40,601 DEBUG [ePay] 		<--TCP: 80:00:00:
+2017-07-24 11:31:40,601 DEBUG [ePay] 		response timeout = 65sec
+2017-07-24 11:31:40,601 INFO  [ePay] 	<--EFT: [69190887] ok
+2017-07-24 11:31:41,914 DEBUG [ePay] 		<--TCP: 04:ff:1f:0a:03:06:1b:24:19:07:0b:42:69:74:74:65:20:4b:61:72:74:65:07:0a:65:69:6e:73:74:65:63:6b:65:6e:
+2017-07-24 11:31:41,914 INFO  [ePay] 	<--EFT: [69190887] intermediate status
+2017-07-24 11:31:41,914 INFO  [ePay] <==EVENT intermediateMsg: 34 chars
+2017-07-24 11:31:41,914 DEBUG [ePay] 			<- intermediateStatus=0xa insert card [Karte einstecken]
+2017-07-24 11:31:41,914 DEBUG [ePay] 			<- timeout=3
+2017-07-24 11:31:41,914 INFO  [ePay] 	-->EFT: [69190887] ack
+2017-07-24 11:31:41,914 DEBUG [ePay] 		-->TCP: 80:00:00:
+2017-07-24 11:31:41,914 INFO  [ePay] <==EVENT display: "Bitte Karte einstecken "
+2017-07-24 11:32:02,602 DEBUG [ePay] 		<--TCP: 04:ff:1c:0d:03:06:18:24:16:07:07:56:6f:72:67:61:6e:67:07:0b:61:62:67:65:62:72:6f:63:68:65:6e:
+2017-07-24 11:32:02,602 INFO  [ePay] 	<--EFT: [69190887] intermediate status
+2017-07-24 11:32:02,602 DEBUG [ePay] 			<- intermediateStatus=0xd processing error [Vorgang abgebrochen]
+2017-07-24 11:32:02,602 DEBUG [ePay] 			<- timeout=3
+2017-07-24 11:32:02,602 INFO  [ePay] <==EVENT intermediateMsg: 31 chars
+2017-07-24 11:32:02,602 INFO  [ePay] 	-->EFT: [69190887] ack
+2017-07-24 11:32:02,602 DEBUG [ePay] 		-->TCP: 80:00:00:
+2017-07-24 11:32:02,602 INFO  [ePay] <==EVENT display: "Vorgang abgebrochen "
+2017-07-24 11:32:02,915 DEBUG [ePay] 		<--TCP: 04:ff:1c:0d:03:06:18:24:16:07:07:56:6f:72:67:61:6e:67:07:0b:61:62:67:65:62:72:6f:63:68:65:6e:
+2017-07-24 11:32:02,915 INFO  [ePay] 	<--EFT: [69190887] intermediate status
+2017-07-24 11:32:02,915 DEBUG [ePay] 			<- intermediateStatus=0xd processing error [Vorgang abgebrochen]
+2017-07-24 11:32:02,915 DEBUG [ePay] 			<- timeout=3
+2017-07-24 11:32:02,915 INFO  [ePay] 	-->EFT: [69190887] ack
+2017-07-24 11:32:02,915 DEBUG [ePay] 		-->TCP: 80:00:00:
+2017-07-24 11:32:07,352 DEBUG [ePay] 		<--TCP: 06:1e:09:6c:06:06:1f:16:03:01:fc:38:
+2017-07-24 11:32:07,352 INFO  [ePay] 	<--EFT: [69190887] abort
+2017-07-24 11:32:07,352 DEBUG [ePay] 			inform PrintMessageHandler
+2017-07-24 11:32:07,352 DEBUG [ePay] 			<- errorCode=0x6c
+2017-07-24 11:32:07,352 DEBUG [ePay] 			<- errorText=Abort via time-out or abort-key
+2017-07-24 11:32:07,352 DEBUG [ePay] 			<- extendedError=0x1fc38
+2017-07-24 11:32:07,384 DEBUG [ePay] 			<- extendedErrorText=customer abort error
+2017-07-24 11:32:07,384 ERROR [ePay] AbortException: Command error. Detail: Command aborted by EFT. (errorID=9, errorCode=0x0)
+
+2017-07-24 11:32:07,399 INFO  [ePay] 	-->EFT: [69190887] ack
+2017-07-24 11:32:07,399 DEBUG [ePay] 		-->TCP: 80:00:00:
+2017-07-24 11:32:07,399 INFO  [ePay] 			goodsIssueStatus: IDLE --> ROLLED_BACK
+2017-07-24 11:32:07,399 INFO  [ePay] 	-->TCP: close()
+2017-07-24 11:32:07,399 DEBUG [ePay] 		EventQueue stopping...
+2017-07-24 11:32:07,399 INFO  [ePay] 	Driver: access released
+2017-07-24 11:32:07,399 ERROR [ePay] AbortException: Command error. Detail: Command aborted by EFT. Abort via time-out or abort-key Extended: customer abort error (errorID=9, errorCode=0x6c)
+
+2017-07-24 11:32:07,399 INFO  [ePay]  <== PayTerminal.payment(1, 0, productCategories={})
+2017-07-24 11:32:07,399 INFO  [ePay]  ==> PaySession.logout()		[5.10.1510.30]
+2017-07-24 11:32:07,399 INFO  [ePay]  ==> PayTerminal.isLoggedIn()		[5.10.1510.30]
+2017-07-24 11:32:07,399 INFO  [ePay]  <== PayTerminal.isLoggedIn(): true
+2017-07-24 11:32:07,399 INFO  [ePay]  ==> PayTerminal.logout()		[5.10.1510.30]
+2017-07-24 11:32:07,399 INFO  [ePay] 	Driver: access granted
+2017-07-24 11:32:07,399 DEBUG [ePay] 		EventQueue starting...
+2017-07-24 11:32:07,399 DEBUG [ePay] 		EventQueue ...started
+2017-07-24 11:32:07,509 INFO  [ePay] 	-->TCP: open(192.168.0.57:20007)
+2017-07-24 11:32:07,509 INFO  [ePay] 		ePay:/192.168.0.65:62366 --> H5000:/192.168.0.57:20007 established
+2017-07-24 11:32:07,509 DEBUG [ePay] 			<- charset=ISO_8859-1
+2017-07-24 11:32:07,509 INFO  [ePay] 	-->EFT: [69190887] abmeldung
+2017-07-24 11:32:07,509 DEBUG [ePay] 		response timeout = 5sec
+2017-07-24 11:32:07,509 DEBUG [ePay] 		-->TCP: 06:02:00:
+2017-07-24 11:32:07,571 DEBUG [ePay] 		<--TCP: 80:00:00:
+2017-07-24 11:32:07,571 DEBUG [ePay] 		response timeout = 65sec
+2017-07-24 11:32:07,571 INFO  [ePay] 	<--EFT: [69190887] ok
+2017-07-24 11:32:08,587 INFO  [ePay] 	-->TCP: close()
+2017-07-24 11:32:08,587 DEBUG [ePay] 		EventQueue stopping...
+2017-07-24 11:32:08,587 INFO  [ePay] 	Driver: access released
+2017-07-24 11:32:08,587 DEBUG [ePay] 		EventQueue ...stopped.
+2017-07-24 11:32:08,587 INFO  [ePay]  ==> PaySession.logout()		[5.10.1510.30]
+2017-07-24 11:32:08,587 INFO  [ePay]  ==> PayTerminal.isLoggedIn()		[5.10.1510.30]
+2017-07-24 11:32:08,587 INFO  [ePay]  <== PayTerminal.isLoggedIn(): false
+2017-07-24 11:32:08,587 DEBUG [ePay] 		AbstractSession.clear()
+2017-07-24 11:32:08,587 INFO  [ePay]  <== PaySession.logout()
+2017-07-24 11:32:08,587 INFO  [ePay]  <== PayTerminal.logout()
+2017-07-24 11:32:08,587 DEBUG [ePay] 		AbstractSession.clear()
+2017-07-24 11:32:08,587 INFO  [ePay]  <== PaySession.logout()
+2017-07-24 11:39:52,984 INFO  [ePay] 
+
+
+
+
+========================================
+	START LOGGING 
+
+	log4j config file: 'C:\Programmierung\ZVT\_ZVT\LUIS_ePayment.xml'
+========================================
+
+2017-07-24 11:39:53,062 INFO  [ePay] 
+
+
+
+
+========================================
+	START LOGGING 
+
+	log4j config file: 'C:\Programmierung\ZVT\_ZVT\LUIS_ePayment.xml'
+========================================
+
+2017-07-24 11:39:53,077 INFO  [ePay] ++++++++++ PayConfiguration ++++++++++
+TERMINAL
+   ID .....................: 69190887
+   device .................: H5000
+      connector to PC .....: LAN
+         protocol .........: ZVT
+      connectors ..........: 
+         RS232
+            COM port ......: COM9
+            baudrate ......: 9600
+            data bits .....: 8
+            parity ........: N
+            stop bits .....: 2.0
+         USB
+            vendor ID .....: 0
+            product ID ....: 0
+            endpoint read .: 0
+            endpoint write.: 0
+         LAN
+            local IP ......: 192.168.0.57
+            local port ....: 20007
+            subnetMask ....: 255.255.255.0
+            gateway IP ....: 192.168.0.233
+   card reader connection .: Controller
+   pinpad connection ......: Controller
+   use internal printer ...: true
+   allowed cards ..........: 0x60
+PROVIDER
+   network connector.... ..: LAN
+   ISDN
+      1.Phone .............: 221534660
+      1.Datex/P ...........: 221534660
+      2.Phone .............: 221534660
+      2.Datex/P ...........: 221534660
+      phone prefix ........: 0
+   LAN
+      1.IP ................: 17.111.131.52
+      1.Port ..............: 500
+      2.IP ................: 217.111.131.52
+      2.Port ..............: 500
+FILES
+   config file ............: zvtLANH5000.cfg
+   license file ...........: prosoft.lic
+   log4j config file ......: LUIS_ePayment.xml
+   merchant journal .......: ./haendlerjournal.log [not encrypted]
+   pin blacklist ..........: ../etc/blacklist.cfg
+PIN
+   merchant PIN ...........: WXQTpooUGXikgkHGKEW7hkOILBpdsDnuQfLAogyypEKbZg/MESes0JnI3uZsd4mqJRDMvh8S8sjpnUU+n7COV3tWZwmbIsmcdGh7j5s7ezkrxhum2R/8x6/bPxQ6rsye5uR4ruTz1TPqztRuTxA8GpkJqjjrtKy9hi2rs7JDISI=
+   service PIN ............: t73xM/hxvcNoIUYdLqaT6HXh8VMTYANb/kGYkj92NoWPLUFzeHSvk0zVNTyplryzblQUO1I1aKHbpbrEkERvuhDu9bP+0V8uSz5cbotRZZxvlK2s/nLxnNoykz1whU4jeYLkFhYKtGDNc8BZa3uso4n9Xyz/B/JkbP30E/G3B/k=
+   max PIN tries ..........: 3
+TIMING
+   timeout ................: 45 sec
+   timeout ISO layer ......: 65 sec
+   time to show texts .....: 3 sec
+DISPLAY
+   messages ...............: true
+   language ...............: de
+   allow administration ...: false
+TEST
+   simulation .............: false
+   merchant data 1 ........: 
+   merchant data 2 ........: 
+   merchant data 3 ........: 
+   merchant data 4 ........: 
+   merchant data 5 ........: 
+---------- PayConfiguration ----------
+
+2017-07-24 11:39:53,093 INFO  [ePay]  ==> PaySession.login(69190887)		[5.10.1510.30]
+2017-07-24 11:39:53,281 DEBUG [ePay] 		response timeout = 65sec
+2017-07-24 11:39:53,281 DEBUG [ePay] 	new ZVTEFTDevice
+2017-07-24 11:39:53,281 DEBUG [ePay] 	new ARTEMAEFTDevice
+2017-07-24 11:39:53,296 DEBUG [ePay] 	new ZVTTransaction
+2017-07-24 11:39:53,296 INFO  [ePay]  ==> PayTerminal.login()		[5.10.1510.30]
+2017-07-24 11:39:53,296 INFO  [ePay] 	Driver: access granted
+2017-07-24 11:39:53,296 DEBUG [ePay] 		EventQueue created
+2017-07-24 11:39:53,296 DEBUG [ePay] 		EventQueue starting...
+2017-07-24 11:39:53,296 DEBUG [ePay] 		EventQueue ...started
+2017-07-24 11:39:53,421 INFO  [ePay] 	-->TCP: open(192.168.0.57:20007)
+2017-07-24 11:39:53,515 INFO  [ePay] 		ePay:/192.168.0.65:62429 --> H5000:/192.168.0.57:20007 established
+2017-07-24 11:39:53,515 DEBUG [ePay] 			<- charset=IBM437
+2017-07-24 11:39:53,812 DEBUG [ePay] 		response timeout = 65sec
+2017-07-24 11:39:53,812 INFO  [ePay] 	-->EFT: [69190887] anmeldung()
+2017-07-24 11:39:53,812 DEBUG [ePay] 			-> useInternalPrinter=true
+2017-07-24 11:39:53,812 DEBUG [ePay] 			-> allowAdministration=false
+2017-07-24 11:39:53,812 DEBUG [ePay] 			-> currency=0x978
+2017-07-24 11:39:53,812 DEBUG [ePay] 			-> chars/line=24
+2017-07-24 11:39:53,812 DEBUG [ePay] 			-> charset=ISO8859-1
+2017-07-24 11:39:53,812 DEBUG [ePay] 			-> cardDataDuringAuthorisation=true
+2017-07-24 11:39:53,827 DEBUG [ePay] 		response timeout = 5sec
+2017-07-24 11:39:53,827 DEBUG [ePay] 		-->TCP: 06:00:23:00:00:00:b8:09:78:06:1b:12:01:24:27:03:14:01:01:26:08:0a:02:06:d1:0a:02:06:d3:1f:04:02:f0:80:1f:05:01:80:
+2017-07-24 11:39:53,921 DEBUG [ePay] 		<--TCP: 80:00:00:
+2017-07-24 11:39:53,921 DEBUG [ePay] 		response timeout = 65sec
+2017-07-24 11:39:53,921 INFO  [ePay] 	<--EFT: [69190887] ok
+2017-07-24 11:39:54,015 DEBUG [ePay] 		<--TCP: 06:0f:14:19:00:29:69:19:08:87:49:09:78:06:08:27:03:14:01:01:12:01:24:
+2017-07-24 11:39:54,015 INFO  [ePay] 	<--EFT: [69190887] completion
+2017-07-24 11:39:54,031 DEBUG [ePay] 			inform PrintMessageHandler
+2017-07-24 11:39:54,046 INFO  [ePay] <==EVENT finalMsg: 23 chars
+2017-07-24 11:39:54,062 DEBUG [ePay] 			<- paymentType=0
+2017-07-24 11:39:54,062 DEBUG [ePay] 			<- tid=69190887
+2017-07-24 11:39:54,062 DEBUG [ePay] 			<- currency=0978
+2017-07-24 11:39:54,077 DEBUG [ePay] 			<- charset=ISO_8859-1
+2017-07-24 11:39:54,077 DEBUG [ePay] 			<- printerLineLength=24
+2017-07-24 11:39:54,077 INFO  [ePay] 	-->EFT: [69190887] ack
+2017-07-24 11:39:54,077 DEBUG [ePay] 		-->TCP: 80:00:00:
+2017-07-24 11:39:54,093 DEBUG [ePay] 			<- device charset=ISO_8859-1
+2017-07-24 11:39:54,093 DEBUG [ePay] 			<- Ai-Bit=0x0
+2017-07-24 11:39:54,093 INFO  [ePay] 	-->TCP: close()
+2017-07-24 11:39:54,093 DEBUG [ePay] 		EventQueue stopping...
+2017-07-24 11:39:54,093 INFO  [ePay] 	Driver: access released
+2017-07-24 11:39:54,093 DEBUG [ePay] 		EventQueue ...stopped.
+2017-07-24 11:39:54,093 INFO  [ePay]  <== PayTerminal.login()
+2017-07-24 11:39:54,093 INFO  [ePay]  <== PaySession.login(69190887): de.luis.kioskComponents.ePayment.t@3a09021
+2017-07-24 11:39:54,093 INFO  [ePay]  ==> PayTerminal.payment(100, 0, productCategories={})		[5.10.1510.30]
+2017-07-24 11:39:54,109 INFO  [ePay] 	Driver: access granted
+2017-07-24 11:39:54,109 DEBUG [ePay] 		EventQueue starting...
+2017-07-24 11:39:54,109 DEBUG [ePay] 		EventQueue ...started
+2017-07-24 11:39:54,218 INFO  [ePay] 	-->TCP: open(192.168.0.57:20007)
+2017-07-24 11:39:54,218 INFO  [ePay] 		ePay:/192.168.0.65:62430 --> H5000:/192.168.0.57:20007 established
+2017-07-24 11:39:54,218 DEBUG [ePay] 			<- charset=ISO_8859-1
+2017-07-24 11:39:54,234 INFO  [ePay] 			goodsIssueStatus: IDLE --> IDLE
+2017-07-24 11:39:54,234 INFO  [ePay] 	-->EFT: [69190887] autorisierung(automatic)
+2017-07-24 11:39:54,265 DEBUG [ePay] 			-> cents=100
+2017-07-24 11:39:54,265 DEBUG [ePay] 			-> currency=0x978
+2017-07-24 11:39:54,265 DEBUG [ePay] 			-> paymentType=68
+2017-07-24 11:39:54,265 DEBUG [ePay] 			-> cardTimeout=30
+2017-07-24 11:39:54,265 DEBUG [ePay] 			-> cardReadingControl=send card identifier
+2017-07-24 11:39:54,265 DEBUG [ePay] 		response timeout = 5sec
+2017-07-24 11:39:54,265 DEBUG [ePay] 		-->TCP: 06:01:14:04:00:00:00:00:01:00:49:09:78:19:44:01:1e:06:04:1f:15:01:80:
+2017-07-24 11:39:54,327 DEBUG [ePay] 		<--TCP: 80:00:00:
+2017-07-24 11:39:54,327 DEBUG [ePay] 		response timeout = 65sec
+2017-07-24 11:39:54,327 INFO  [ePay] 	<--EFT: [69190887] ok
+2017-07-24 11:39:55,078 DEBUG [ePay] 		<--TCP: 04:ff:1f:0a:03:06:1b:24:19:07:0b:42:69:74:74:65:20:4b:61:72:74:65:07:0a:65:69:6e:73:74:65:63:6b:65:6e:
+2017-07-24 11:39:55,078 INFO  [ePay] 	<--EFT: [69190887] intermediate status
+2017-07-24 11:39:55,078 INFO  [ePay] <==EVENT intermediateMsg: 34 chars
+2017-07-24 11:39:55,078 DEBUG [ePay] 			<- intermediateStatus=0xa insert card [Karte einstecken]
+2017-07-24 11:39:55,078 DEBUG [ePay] 			<- timeout=3
+2017-07-24 11:39:55,109 INFO  [ePay] 	-->EFT: [69190887] ack
+2017-07-24 11:39:55,109 DEBUG [ePay] 		-->TCP: 80:00:00:
+2017-07-24 11:39:55,109 INFO  [ePay] <==EVENT display: "Bitte Karte einstecken "
+2017-07-24 11:40:02,735 DEBUG [ePay] 		<--TCP: 04:ff:1c:0d:03:06:18:24:16:07:07:56:6f:72:67:61:6e:67:07:0b:61:62:67:65:62:72:6f:63:68:65:6e:
+2017-07-24 11:40:02,735 INFO  [ePay] 	<--EFT: [69190887] intermediate status
+2017-07-24 11:40:02,735 DEBUG [ePay] 			<- intermediateStatus=0xd processing error [Vorgang abgebrochen]
+2017-07-24 11:40:02,735 INFO  [ePay] <==EVENT intermediateMsg: 31 chars
+2017-07-24 11:40:02,735 DEBUG [ePay] 			<- timeout=3
+2017-07-24 11:40:02,735 INFO  [ePay] 	-->EFT: [69190887] ack
+2017-07-24 11:40:02,735 DEBUG [ePay] 		-->TCP: 80:00:00:
+2017-07-24 11:40:02,735 INFO  [ePay] <==EVENT display: "Vorgang abgebrochen "
+2017-07-24 11:40:03,047 DEBUG [ePay] 		<--TCP: 04:ff:1c:0d:03:06:18:24:16:07:07:56:6f:72:67:61:6e:67:07:0b:61:62:67:65:62:72:6f:63:68:65:6e:
+2017-07-24 11:40:03,047 INFO  [ePay] 	<--EFT: [69190887] intermediate status
+2017-07-24 11:40:03,047 DEBUG [ePay] 			<- intermediateStatus=0xd processing error [Vorgang abgebrochen]
+2017-07-24 11:40:03,047 DEBUG [ePay] 			<- timeout=3
+2017-07-24 11:40:03,047 INFO  [ePay] <==EVENT intermediateMsg: 31 chars
+2017-07-24 11:40:03,047 INFO  [ePay] <==EVENT display: "Vorgang abgebrochen "
+2017-07-24 11:40:03,047 INFO  [ePay] 	-->EFT: [69190887] ack
+2017-07-24 11:40:03,047 DEBUG [ePay] 		-->TCP: 80:00:00:
+2017-07-24 11:40:07,423 DEBUG [ePay] 		<--TCP: 06:1e:09:6c:06:06:1f:16:03:01:fc:38:
+2017-07-24 11:40:07,423 INFO  [ePay] 	<--EFT: [69190887] abort
+2017-07-24 11:40:07,423 DEBUG [ePay] 			inform PrintMessageHandler
+2017-07-24 11:40:07,423 INFO  [ePay] <==EVENT finalMsg: 12 chars
+2017-07-24 11:40:07,423 DEBUG [ePay] 			<- errorCode=0x6c
+2017-07-24 11:40:07,439 DEBUG [ePay] 			<- errorText=Abort via time-out or abort-key
+2017-07-24 11:40:07,439 DEBUG [ePay] 			<- extendedError=0x1fc38
+2017-07-24 11:40:07,486 DEBUG [ePay] 			<- extendedErrorText=customer abort error
+2017-07-24 11:40:07,502 ERROR [ePay] AbortException: Command error. Detail: Command aborted by EFT. (errorID=9, errorCode=0x0)
+
+2017-07-24 11:40:07,502 INFO  [ePay] 	-->EFT: [69190887] ack
+2017-07-24 11:40:07,502 DEBUG [ePay] 		-->TCP: 80:00:00:
+2017-07-24 11:40:07,502 INFO  [ePay] 			goodsIssueStatus: IDLE --> ROLLED_BACK
+2017-07-24 11:40:07,502 INFO  [ePay] 	-->TCP: close()
+2017-07-24 11:40:07,502 DEBUG [ePay] 		EventQueue stopping...
+2017-07-24 11:40:07,502 INFO  [ePay] 	Driver: access released
+2017-07-24 11:40:07,502 DEBUG [ePay] 		EventQueue ...stopped.
+2017-07-24 11:40:07,502 ERROR [ePay] AbortException: Command error. Detail: Command aborted by EFT. Abort via time-out or abort-key Extended: customer abort error (errorID=9, errorCode=0x6c)
+
+2017-07-24 11:40:07,502 INFO  [ePay]  <== PayTerminal.payment(100, 0, productCategories={})
+2017-07-24 11:40:07,502 INFO  [ePay]  ==> PaySession.logout()		[5.10.1510.30]
+2017-07-24 11:40:07,502 INFO  [ePay]  ==> PayTerminal.isLoggedIn()		[5.10.1510.30]
+2017-07-24 11:40:07,502 INFO  [ePay]  <== PayTerminal.isLoggedIn(): true
+2017-07-24 11:40:07,502 INFO  [ePay]  ==> PayTerminal.logout()		[5.10.1510.30]
+2017-07-24 11:40:07,502 INFO  [ePay] 	Driver: access granted
+2017-07-24 11:40:07,502 DEBUG [ePay] 		EventQueue starting...
+2017-07-24 11:40:07,502 DEBUG [ePay] 		EventQueue ...started
+2017-07-24 11:40:07,627 INFO  [ePay] 	-->TCP: open(192.168.0.57:20007)
+2017-07-24 11:40:07,627 INFO  [ePay] 		ePay:/192.168.0.65:62431 --> H5000:/192.168.0.57:20007 established
+2017-07-24 11:40:07,627 DEBUG [ePay] 			<- charset=ISO_8859-1
+2017-07-24 11:40:07,627 INFO  [ePay] 	-->EFT: [69190887] abmeldung
+2017-07-24 11:40:07,627 DEBUG [ePay] 		response timeout = 5sec
+2017-07-24 11:40:07,627 DEBUG [ePay] 		-->TCP: 06:02:00:
+2017-07-24 11:40:07,690 DEBUG [ePay] 		<--TCP: 80:00:00:
+2017-07-24 11:40:07,690 DEBUG [ePay] 		response timeout = 65sec
+2017-07-24 11:40:07,690 INFO  [ePay] 	<--EFT: [69190887] ok
+2017-07-24 11:40:08,706 INFO  [ePay] 	-->TCP: close()
+2017-07-24 11:40:08,706 DEBUG [ePay] 		EventQueue stopping...
+2017-07-24 11:40:08,706 INFO  [ePay] 	Driver: access released
+2017-07-24 11:40:08,706 INFO  [ePay]  ==> PaySession.logout()		[5.10.1510.30]
+2017-07-24 11:40:08,706 DEBUG [ePay] 		EventQueue ...stopped.
+2017-07-24 11:40:08,706 INFO  [ePay]  ==> PayTerminal.isLoggedIn()		[5.10.1510.30]
+2017-07-24 11:40:08,706 INFO  [ePay]  <== PayTerminal.isLoggedIn(): false
+2017-07-24 11:40:08,706 DEBUG [ePay] 		AbstractSession.clear()
+2017-07-24 11:40:08,706 INFO  [ePay]  <== PaySession.logout()
+2017-07-24 11:40:08,706 INFO  [ePay]  <== PayTerminal.logout()
+2017-07-24 11:40:08,706 DEBUG [ePay] 		AbstractSession.clear()
+2017-07-24 11:40:08,706 INFO  [ePay]  <== PaySession.logout()

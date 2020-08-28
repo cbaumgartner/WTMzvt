@@ -1,0 +1,26 @@
+#############################################################
+#
+#    LUIS license file
+#    -----------------
+#    Do not change or manipulate in any way.
+#    If you have software problems, contact us for a valid license.
+#
+#    Copyright by LUTZ Informationssysteme GmbH
+#                 Konrad-Adenauer-Platz 3
+#                 D-56410 Montabaur
+#                 Germany
+#                 +49 (2602) 94922-0
+#                 http://www.lutz-is.de
+############################################################
+#
+#Wed Jul 05 12:48:30 CEST 2017
+Version=2.0 
+MaxClients=1
+ExpiredDate=30.09.17
+Product=LUIS ePayment
+Code2=d46d2894a8cb33994f48b38d105ead5b6be67437de32cd87b2e40f7c66c1c
+XCode2=b2621f5e75576f5d32431d378a05097b
+Code1=25542d2cef092648de948cb7192ba9c2
+XCode1=25542d2cef092648de948cb7192ba9c2-6dd40d981069c25afbf007d399b6192-70964ff7c9b1812a430364e665fdb6e1
+Constraints=all
+LicenseHolder=prosoft.co.at

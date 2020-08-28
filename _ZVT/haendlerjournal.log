@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<merchantjournal timestamp="2017-08-02 08:04:18" >
+<payment timestamp="2017-08-02 08:04:18" success="true" >
+	<intermediary_result err_text="null" timestamp_eft="2017-08-02 08:02:55" />
+</payment >
+
+<payment timestamp="2017-08-02 08:05:23" success="true" >
+	<intermediary_result err_text="null" timestamp_eft="2017-08-02 08:04:01" />
+</payment >
+
+<payment timestamp="2017-08-02 08:12:08" success="true" >
+	<intermediary_result err_text="null" timestamp_eft="2017-08-02 08:10:46" />
+</payment >
+
