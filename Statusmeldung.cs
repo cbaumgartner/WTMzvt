@@ -6,23 +6,14 @@
 //--------------------
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using System.IO;
-
-//using System.Threading.Tasks;
 using System.Threading;
-
+using System.Windows.Forms;
 using de.luis.kioskComponents.ePayment;
 using de.luis.kioskComponents.ePayment.exception;
 
-
-namespace ZVT
+namespace WtmZvt
 {
     public partial class Statusmeldung : Form
     {
@@ -37,27 +28,27 @@ namespace ZVT
             OFF, ONL, OUT, STO, ABR
         };
 
-        private int mBetrag;
-        private string mPfad;
-        public Funktionstyp mOperation;
-        private PayTerminal mTerminal;
+        private int _amount;
+        private string _configPath;
+        private Funktionstyp _operation;
+        private PayTerminal _terminal;
 
         //Einloggen, Ausloggen, Betrag_Übermitteln, Betrag_Stornieren, Kassenabschluss
 
-        public Statusmeldung(int _betrag)
+        public Statusmeldung(int amount)
         {
             InitializeComponent();
-            mBetrag = _betrag;
-            mPfad = "zvtLANH5000.cfg";
-            mOperation = 0; //Default Offline
+            _amount = amount;
+            _configPath = "zvtLANH5000.cfg";
+            _operation = 0; //Default Offline
         }
 
-        public Statusmeldung(int _betrag, string _pfad, string _opteration = "OFF") //Default Offline
+        public Statusmeldung(int amount, string configPath, string operation = "OFF") //Default Offline
         {
             InitializeComponent();
-            mBetrag = _betrag;
-            mPfad = _pfad;
-            Enum.TryParse(_opteration, out mOperation);
+            _amount = amount;
+            _configPath = configPath;
+            Enum.TryParse(operation, out _operation);
         }
 
         private void Statusmeldung_Load(object sender, EventArgs e)
@@ -65,7 +56,7 @@ namespace ZVT
 
             lbl_Status.Text = "Verbindung zum EC-Terminal wird aufgebaut...";
             btn_OK.Enabled = false;
-            switch (mOperation)
+            switch (_operation)
             {
                 case Funktionstyp.OFF:
                     //lbl_Status.Text = "FUNKTION OFFLINE!!!";
@@ -124,7 +115,7 @@ namespace ZVT
         // Funktionen 
 
         //Einloggen, Zahlung abwickeln, ausloggen -> Funktionalität wie bei Penz
-        private bool OFFline()
+        private void OFFline()
         {
             Thread t = new Thread(() =>
              {
@@ -133,7 +124,7 @@ namespace ZVT
 
                      //--------------
                      // create/read configuration from a configuration file
-                     PayConfiguration config = createConfigFromFile(mPfad);
+                     PayConfiguration config = createConfigFromFile(_configPath);
 
                      // start a new session
                      PaySession session = new PaySession();
@@ -144,7 +135,7 @@ namespace ZVT
                      session.setListener(msgList);
 
                      // login (this is always the first communication to the EFT)
-                     mTerminal = session.login(config);
+                     _terminal = session.login(config);
 
                      try
                      {
@@ -156,7 +147,7 @@ namespace ZVT
                          // Then we start the authorisation of the card
 
                          short payType = PayTerminal.__Fields.PAY_TYPE_AUTOMATIC;
-                         PayTransaction transaction = mTerminal.payment(mBetrag, payType, media);
+                         PayTransaction transaction = _terminal.payment(_amount, payType, media);
 
 
 
@@ -184,10 +175,9 @@ namespace ZVT
                  }
              });
             t.Start();
-            return true;
         }
 
-        private bool ONLine()
+        private void ONLine()
         {
             Thread t = new Thread(() =>
             {
@@ -196,7 +186,7 @@ namespace ZVT
 
                     //--------------
                     // create/read configuration from a configuration file
-                    PayConfiguration config = createConfigFromFile(mPfad);
+                    PayConfiguration config = createConfigFromFile(_configPath);
 
                     // start a new session
                     PaySession session = new PaySession();
@@ -209,7 +199,7 @@ namespace ZVT
                     if (!session.isLoggedIn())
                     {
                         // login (this is always the first communication to the EFT)
-                        mTerminal = session.login(config);
+                        _terminal = session.login(config);
                     }
 
 
@@ -223,7 +213,7 @@ namespace ZVT
                         // Then we start the authorisation of the card
 
                         short payType = PayTerminal.__Fields.PAY_TYPE_AUTOMATIC;
-                        PayTransaction transaction = mTerminal.payment(mBetrag, payType, media);
+                        PayTransaction transaction = _terminal.payment(_amount, payType, media);
 
                         // When we are here, the given card was accepted. We commit the transaction.
                         // If transaction is null, the device doesn't support commit and we are finished.
@@ -244,17 +234,16 @@ namespace ZVT
                 }
             });
             t.Start();
-            return true;
         }
 
-        private bool LogOUT()
+        private void LogOUT()
         {
             Thread t = new Thread(() =>
             {
                 try
                 {
                     // create/read configuration from a configuration file
-                    PayConfiguration config = createConfigFromFile(mPfad);
+                    PayConfiguration config = createConfigFromFile(_configPath);
 
                     // start a new session
                     PaySession session = new PaySession();
@@ -265,7 +254,7 @@ namespace ZVT
                     session.setListener(msgList);
 
                     // login (this is always the first communication to the EFT)
-                    mTerminal = session.login(config);
+                    _terminal = session.login(config);
 
                     // logout at last
                     session.logout();
@@ -278,25 +267,22 @@ namespace ZVT
                 }
             });
             t.Start();
-            return true;
         }
 
-        private bool STOrno() //wird noch nicht verwendet
+        private void STOrno() //wird noch nicht verwendet
         {
 
             //NOCH ZU TESTEN!!!
-            //terminal.reversal(mBetrag, payType, media); //Storno
-            return true;
+            //terminal.reversal(_amount, payType, media); //Storno
         }
-        private bool ABRechnung()
+        private void ABRechnung()
         {
-
             Thread t = new Thread(() =>
             {
                 try
                 {
                     // create/read configuration from a configuration file
-                    PayConfiguration config = createConfigFromFile(mPfad);
+                    PayConfiguration config = createConfigFromFile(_configPath);
 
                     // start a new session
                     PaySession session = new PaySession();
@@ -307,11 +293,11 @@ namespace ZVT
                     session.setListener(msgList);
 
                     // login (this is always the first communication to the EFT)
-                    mTerminal = session.login(config);
+                    _terminal = session.login(config);
 
                     //NOCH ZU TESTEN!!!
 
-                    mTerminal.reconciliation(); //Tageslosung/Kasseschnitt
+                    _terminal.reconciliation(); //Tageslosung/Kasseschnitt
 
                     // logout at last
                     session.logout();
@@ -323,7 +309,6 @@ namespace ZVT
                 }
             });
             t.Start();
-            return true;
         }
 
 
@@ -391,9 +376,6 @@ namespace ZVT
             Console.WriteLine("+++++display message (" + code + ")+++++");
             Console.WriteLine(message);
             Console.WriteLine("-----display message (" + code + ")-----");
-
-            //string caption = "Meldung vom EC-Terminal - setDisplayMessage";
-            //DialogResult result;
 
             //Zahlung erfolgreich
             if (message == "Zahlung erfolgt " || message == "Kassenschnitt ")

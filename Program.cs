@@ -7,12 +7,11 @@
 //--------------------
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-//using System.Threading.Tasks;
+using System.Globalization;
 using System.Windows.Forms;
+//using System.Threading.Tasks;
 
-namespace ZVT
+namespace WtmZvt
 {
     
     static class Program
@@ -22,27 +21,32 @@ namespace ZVT
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
             
             if (args.Length == 0)
             {
                 MessageBox.Show("Kein Betrag mitgeschickt!!!");
                 MessageBox.Show("Aufruf: 'ZVT.exe' 'Betrag in Cent' '[optional Pfad und Configdatei] - default: zvtLANH5000.cfg'");
+                return;
             }
-            else if ((Convert.ToInt32(args[0])) < 0) //für Stornofunktion ändern!!!
+
+            if (!int.TryParse(args[0], NumberStyles.Integer, CultureInfo.InvariantCulture, out var amount))
             {
-                MessageBox.Show("Kein negativer Betrag möglich!!!");
+                MessageBox.Show($"{args[0]} ist kein gültiger Betrag!");
+                return;
             }
-            else if (args.Length == 2) //Pfad mit angegeben
+
+            switch (args.Length)
             {
-                Application.Run(new Statusmeldung(Convert.ToInt32(args[0]), args[1]));
-            }
-            else if (args.Length == 3) //Pfad mit angegeben
-            {
-                Application.Run(new Statusmeldung(Convert.ToInt32(args[0]), args[1], args[2]));
-            }
-            else
-            {
-                Application.Run(new Statusmeldung(Convert.ToInt32(args[0])));
+                case 2:
+                    Application.Run(new Statusmeldung(amount, args[1]));
+                    break;
+                case 3:
+                    Application.Run(new Statusmeldung(amount, args[1], args[2]));
+                    break;
+                default:
+                    Application.Run(new Statusmeldung(amount));
+                    break;
             }
         }
     }

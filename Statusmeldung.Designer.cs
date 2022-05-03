@@ -1,4 +1,4 @@
-﻿namespace ZVT
+﻿namespace WtmZvt
 {
     partial class Statusmeldung
     {
