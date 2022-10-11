@@ -1,0 +1,3 @@
+rem ..\build\signtool_10\signtool.exe sign /n "Software & Consulting Baumgartner GmbH" /fd sha256 /tr http://sha256timestamp.ws.symantec.com/sha256/timestamp "..\publish\WtmTseAdministration\x64\WtmTseAdministration.exe"
+..\build\signtool_10\signtool.exe sign /n "Software & Consulting Baumgartner GmbH" /fd sha256 /tr http://sha256timestamp.ws.symantec.com/sha256/timestamp "..\publish\ZVT.exe"
+pause

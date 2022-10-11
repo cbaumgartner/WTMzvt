@@ -53,6 +53,27 @@ namespace WtmZvt
 
         private void Statusmeldung_Load(object sender, EventArgs e)
         {
+            if ((ModifierKeys & Keys.Shift) == 0)
+            {
+                string initLocation = Properties.Settings.Default.InitialLocation;
+                Point pInitLocation = new Point(0, 0);
+                Size sInitSize = Size;
+                if (!string.IsNullOrEmpty(initLocation))
+                {
+                    string[] parts = initLocation.Split(',');
+                    if (parts.Length >= 2)
+                    {
+                        pInitLocation = new Point(int.Parse(parts[0]), int.Parse(parts[1]));
+                    }
+                    if (parts.Length >= 4)
+                    {
+                        sInitSize = new Size(int.Parse(parts[2]), int.Parse(parts[3]));
+                    }
+                }
+
+                Size = sInitSize;
+                Location = pInitLocation;
+            }
 
             lbl_Status.Text = "Verbindung zum EC-Terminal wird aufgebaut...";
             btn_OK.Enabled = false;
@@ -95,16 +116,13 @@ namespace WtmZvt
 
         static PayConfiguration createConfigFromFile(String filename)
         {
-            if (File.Exists(filename))
-            {
-                //für Debug
-                //MessageBox.Show("Config-Datei passt");
-            }
-            else
+            if (!File.Exists(filename))
             {
                 MessageBox.Show("Config-Datei fehlt oder falscher Pfad!");
+                Application.Exit();
+                return null;
             }
-
+            
             // create/read configuration from a configuration file
             PayConfiguration config = new PayConfiguration(filename);
             return config;
@@ -315,6 +333,25 @@ namespace WtmZvt
         private void btn_OK_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void Statusmeldung_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if ((ModifierKeys & Keys.Shift) == 0)
+            {
+                Point location = this.Location;
+                Size size = this.Size;
+
+                if (this.WindowState != FormWindowState.Normal)
+                {
+                    location = this.RestoreBounds.Location;
+                    size = this.RestoreBounds.Size;
+                }
+
+                string initLocation = string.Join(",", location.X, location.Y, size.Width, size.Height);
+                Properties.Settings.Default.InitialLocation = initLocation;
+                Properties.Settings.Default.Save();
+            }
         }
     }
 
