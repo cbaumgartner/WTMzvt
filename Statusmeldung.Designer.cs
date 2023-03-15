@@ -1,4 +1,4 @@
-﻿namespace ZVT
+﻿namespace WtmZvt
 {
     partial class Statusmeldung
     {
@@ -63,6 +63,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Statusmeldung";
             this.Text = "Statusmeldung EC-Terminal";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Statusmeldung_FormClosing);
             this.Load += new System.EventHandler(this.Statusmeldung_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
