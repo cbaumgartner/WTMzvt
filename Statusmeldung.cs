@@ -17,6 +17,8 @@ namespace WtmZvt
 {
     public partial class Statusmeldung : Form
     {
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+
         //OFF = Offline     -> Login, Betrag, Logout                -> Terminal wieder offline
         //ONL = Online      -> Login (falls offline), Betrag        -> Terminal betriebsbereit, manuelles ausloggen
         //OUT = Ausloggen   -> nur Ausloggen                        -> Terminal wieder offline
@@ -53,65 +55,81 @@ namespace WtmZvt
 
         private void Statusmeldung_Load(object sender, EventArgs e)
         {
-            if ((ModifierKeys & Keys.Shift) == 0)
+            Logger.Debug("Startup ZVT");
+            try
             {
-                string initLocation = Properties.Settings.Default.InitialLocation;
-                Point pInitLocation = new Point(0, 0);
-                Size sInitSize = Size;
-                if (!string.IsNullOrEmpty(initLocation))
+                if ((ModifierKeys & Keys.Shift) == 0)
                 {
-                    string[] parts = initLocation.Split(',');
-                    if (parts.Length >= 2)
+                    string initLocation = Properties.Settings.Default.InitialLocation;
+                    Point pInitLocation = new Point(0, 0);
+                    Size sInitSize = Size;
+                    if (!string.IsNullOrEmpty(initLocation))
                     {
-                        pInitLocation = new Point(int.Parse(parts[0]), int.Parse(parts[1]));
+                        string[] parts = initLocation.Split(',');
+                        if (parts.Length >= 2)
+                        {
+                            pInitLocation = new Point(int.Parse(parts[0]), int.Parse(parts[1]));
+                        }
+                        if (parts.Length >= 4)
+                        {
+                            sInitSize = new Size(int.Parse(parts[2]), int.Parse(parts[3]));
+                        }
                     }
-                    if (parts.Length >= 4)
-                    {
-                        sInitSize = new Size(int.Parse(parts[2]), int.Parse(parts[3]));
-                    }
+
+                    Size = sInitSize;
+                    Location = pInitLocation;
                 }
 
-                Size = sInitSize;
-                Location = pInitLocation;
-            }
+                lbl_Status.Text = "Verbindung zum EC-Terminal wird aufgebaut...";
+                btn_OK.Enabled = false;
+                switch (_operation)
+                {
+                    case Funktionstyp.OFF:
+                        //lbl_Status.Text = "FUNKTION OFFLINE!!!";
+                        Logger.Info("Funktionstyp.OFF");
+                        OFFline();
+                        break;
 
-            lbl_Status.Text = "Verbindung zum EC-Terminal wird aufgebaut...";
-            btn_OK.Enabled = false;
-            switch (_operation)
+                    case Funktionstyp.ONL:
+                        //lbl_Status.Text = "FUNKTION ONLINE!!!";
+                        Logger.Info("Funktionstyp.ON");
+                        ONLine();
+                        break;
+
+                    case Funktionstyp.OUT:
+                        //lbl_Status.Text = "FUNKTION LOGOUT!!!";
+                        Logger.Info("Funktionstyp.OUT");
+                        LogOUT();
+                        lbl_Status.Text = "manuelles Logout!";
+                        btn_OK.Enabled = true;
+                        break;
+
+                    case Funktionstyp.STO:
+                        //lbl_Status.Text = "FUNKTION STORNO!!!";
+                        Logger.Info("Funktionstyp.STO");
+                        STOrno();
+                        break;
+
+                    case Funktionstyp.ABR:
+                        //lbl_Status.Text = "FUNKTION ABRECHNUNG!!!";
+                        Logger.Info("Funktionstyp.ABR");
+                        ABRechnung();
+                        break;
+
+
+
+                    default:
+                        lbl_Status.Text = "FUNKTION DEFAULT!!!";
+                        break;
+                }
+
+            }
+            catch (Exception ex)
             {
-                case Funktionstyp.OFF:
-                    //lbl_Status.Text = "FUNKTION OFFLINE!!!";
-                    OFFline();
-                    break;
-
-                case Funktionstyp.ONL:
-                    //lbl_Status.Text = "FUNKTION ONLINE!!!";
-                    ONLine();
-                    break;
-
-                case Funktionstyp.OUT:
-                    //lbl_Status.Text = "FUNKTION LOGOUT!!!";
-                    LogOUT();
-                    lbl_Status.Text = "manuelles Logout!";
-                    btn_OK.Enabled = true;
-                    break;
-
-                case Funktionstyp.STO:
-                    //lbl_Status.Text = "FUNKTION STORNO!!!";
-                    STOrno();
-                    break;
-
-                case Funktionstyp.ABR:
-                    //lbl_Status.Text = "FUNKTION ABRECHNUNG!!!";
-                    ABRechnung();
-                    break;
-
-
-
-                default:
-                    lbl_Status.Text = "FUNKTION DEFAULT!!!";
-                    break;
+                Logger.Error(ex);
+                Application.Exit();
             }
+            Logger.Debug("ZVT loaded");
         }
 
         static PayConfiguration createConfigFromFile(String filename)
@@ -119,8 +137,7 @@ namespace WtmZvt
             if (!File.Exists(filename))
             {
                 MessageBox.Show("Config-Datei fehlt oder falscher Pfad!");
-                Application.Exit();
-                return null;
+                throw new Exception("Config-Datei fehlt oder falscher Pfad!");
             }
             
             // create/read configuration from a configuration file
@@ -139,21 +156,26 @@ namespace WtmZvt
              {
                  try
                  {
-
+                     Logger.Debug("Start Offline");
                      //--------------
                      // create/read configuration from a configuration file
                      PayConfiguration config = createConfigFromFile(_configPath);
-
+                     Logger.Debug("Config loaded.");
+                     
                      // start a new session
                      PaySession session = new PaySession();
+                     Logger.Debug("Session created.");
 
                      // we define a message listener for events (optional)
                      MyMessageListener msgList = new MyMessageListener(lbl_Status, btn_OK);
+                     Logger.Debug("MyMessageListener created.");
 
                      session.setListener(msgList);
+                     Logger.Debug("Listen to Session.");
 
                      // login (this is always the first communication to the EFT)
                      _terminal = session.login(config);
+                     Logger.Debug("Logged on to Session");
 
                      try
                      {
@@ -161,35 +183,40 @@ namespace WtmZvt
 
                          // First we create the result object PayMedia
                          PayMedia media = new PayMedia();
-
+                         Logger.Debug("PayMedia created.");
                          // Then we start the authorisation of the card
 
                          short payType = PayTerminal.__Fields.PAY_TYPE_AUTOMATIC;
+                         Logger.Debug($"Start transaction with terminal: [{_amount}], [{payType}], [{media}]");
                          PayTransaction transaction = _terminal.payment(_amount, payType, media);
-
+                         Logger.Debug("Transaction created.");
 
 
                          // When we are here, the given card was accepted. We commit the transaction.
                          // If transaction is null, the device doesn't support commit and we are finished.
                          if (transaction != null)
                          {
+                             Logger.Debug("Commit transaction");
                              transaction.commit(media);
+                             Logger.Debug("Transaction committed.");
                          }
                      }
                      finally
                      {
                          PayResult result = new PayResult();
                          
+                         Logger.Debug("GetCustomerReceipt");
                          string Custreceitpt = result.getCustomerReceipt();
 
                          // logout at last
                          session.logout();
+                         Logger.Debug("Logout from Session");
                      }
                  }
-                 catch (PayException x)
+                 catch (PayException ex)
                  {
                      // catch all PayExceptions and write to console
-                     Console.WriteLine(x.toString());
+                     Logger.Error(ex);
                  }
              });
             t.Start();
@@ -245,10 +272,10 @@ namespace WtmZvt
 
                     }
                 }
-                catch (PayException x)
+                catch (PayException ex)
                 {
                     // catch all PayExceptions and write to console
-                    Console.WriteLine(x.toString());
+                    Logger.Error(ex);
                 }
             });
             t.Start();
@@ -278,10 +305,10 @@ namespace WtmZvt
                     session.logout();
 
                 }
-                catch (PayException x)
+                catch (PayException ex)
                 {
                     // catch all PayExceptions and write to console
-                    Console.WriteLine(x.toString());
+                    Logger.Error(ex);
                 }
             });
             t.Start();
@@ -320,10 +347,10 @@ namespace WtmZvt
                     // logout at last
                     session.logout();
                 }
-                catch (PayException x)
+                catch (PayException ex)
                 {
                     // catch all PayExceptions and write to console
-                    Console.WriteLine(x.toString());
+                    Logger.Error(ex);
                 }
             });
             t.Start();
@@ -352,6 +379,8 @@ namespace WtmZvt
                 Properties.Settings.Default.InitialLocation = initLocation;
                 Properties.Settings.Default.Save();
             }
+
+            Logger.Debug("Close ZVT");
         }
     }
 
