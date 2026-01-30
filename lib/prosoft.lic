@@ -1,0 +1,27 @@
+#########################################################################
+#                                                                      #
+#    LUIS license file                                                 #
+#    -----------------                                                 #
+#   Do not change or manipulate in any way.                            #
+#   If you have software problems, contact us for a valid license.     #
+#                                                                      #
+#   Copyright by LUTZ Informationssysteme GmbH                         #
+#                                                                      #
+#                info@lutz-is.de                                       #
+#                http://www.lutz-is.de                                 #
+#                                                                      #
+########################################################################
+#
+#
+#
+#Fri Dec 14 11:00:06 CET 2018
+Version=2.0 
+MaxClients=1
+ExpiredDate=14.01.19
+Product=LUIS ePayment
+Code2=cbdd831e37304151e5d52a17faa83de34a96b4c6d3c505370b125326c784805
+XCode2=b592ca881d8dc3918fa6d4a93cead3ef
+Code1=e87673c550665a3f622d51a5b8ce1816
+XCode1=e87673c550665a3f622d51a5b8ce1816-29c5be5a41bdfa5ca3107d33969ce800-d33e6c6f43fec81b5ffcd1a3d79aa865
+Constraints=all
+LicenseHolder=Prosoft GmbH

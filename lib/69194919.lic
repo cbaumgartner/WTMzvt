@@ -1,0 +1,28 @@
+#############################################################
+#
+#    LUIS license file
+#    -----------------
+#    Do not change or manipulate in any way.
+#    If you have software problems, contact us for a valid license.
+#
+#    Copyright by LUTZ Informationssysteme GmbH
+#                 Konrad-Adenauer-Platz 3
+#                 D-56410 Montabaur
+#                 Germany
+#                 +49 (2602) 94922-0
+#                 http://www.lutz-is.de
+############################################################
+#
+#Tue Jul 25 10:15:40 CEST 2017
+Version=2.0 
+Device3=69294919
+Device2=69094919
+Device1=69194919
+MaxClients=1
+Product=LUIS ePayment
+Code2=777572d781b2e5e594b82a297cea6d3c8f16ae1bede76ccae70bfe9c4ce49c7
+XCode2=5693d3857eecf32d97389dd8047cb8dc
+Code1=2af7473bf49db3273a619bc1178c42e8
+XCode1=2af7473bf49db3273a619bc1178c42e8-007d22bea2b990b88b7a45d46ebea4-0561d9c636756437c5a98539ff03ca7
+Constraints=standard
+LicenseHolder=cardtech CARD & POS Service GmbH

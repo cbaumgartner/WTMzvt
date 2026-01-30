@@ -1,0 +1,26 @@
+#########################################################################
+#                                                                      #
+#    LUIS license file                                                 #
+#    -----------------                                                 #
+#   Do not change or manipulate in any way.                            #
+#   If you have software problems, contact us for a valid license.     #
+#                                                                      #
+#   Copyright by LUTZ Informationssysteme GmbH                         #
+#                                                                      #
+#                info@lutz-is.de                                       #
+#                http://www.lutz-is.de                                 #
+#                                                                      #
+########################################################################
+#
+#
+#
+#Fri Oct 19 12:05:50 CEST 2018
+Version=2.0 
+Device1=69278542
+MaxClients=1
+Product=LUIS ePayment
+Code2=b3d252223c79ab3325bc5cb80c2752db1edc980dd54c95b14b5149e0f0f810
+XCode2=226d2429a7ed50a70b06e03d969d0ceb
+Code1=2dbff3ef73b761354f98e3f7bf7e107a
+XCode1=2dbff3ef73b761354f98e3f7bf7e107a-cbb0d821c08401defb5cd1c924eb0859-a028207b411dcb122b785f4a30c0de7
+LicenseHolder=Texspo GmbH
