@@ -186,11 +186,8 @@ namespace WtmZvt
                          Logger.Debug("PayMedia created.");
                          // Then we start the authorisation of the card
 
-                         short payType = PayTerminal.__Fields.PAY_TYPE_AUTOMATIC;
-                         Logger.Debug($"Start transaction with terminal: [{_amount}], [{payType}], [{media}]");
-                         PayTransaction transaction = _terminal.payment(_amount, payType, media);
-                         Logger.Debug("Transaction created.");
-
+                         PayTransaction transaction = CreatePayTransaction(media);
+                         
 
                          // When we are here, the given card was accepted. We commit the transaction.
                          // If transaction is null, the device doesn't support commit and we are finished.
@@ -257,8 +254,7 @@ namespace WtmZvt
 
                         // Then we start the authorisation of the card
 
-                        short payType = PayTerminal.__Fields.PAY_TYPE_AUTOMATIC;
-                        PayTransaction transaction = _terminal.payment(_amount, payType, media);
+                        PayTransaction transaction = CreatePayTransaction(media);
 
                         // When we are here, the given card was accepted. We commit the transaction.
                         // If transaction is null, the device doesn't support commit and we are finished.
@@ -320,6 +316,17 @@ namespace WtmZvt
             //NOCH ZU TESTEN!!!
             //terminal.reversal(_amount, payType, media); //Storno
         }
+
+        private PayTransaction CreatePayTransaction(PayMedia media)
+        {
+            short payType = PayTerminal.__Fields.PAY_TYPE_AUTOMATIC;
+            Logger.Debug($"Start transaction with terminal: [{_amount}], [{payType}], [{media}]");
+            PayTransaction transaction = _terminal.payment(_amount, payType, 30, new ProductCategory[] { }, media);
+            Logger.Debug("Transaction created.");
+
+            return transaction;
+        }
+
         private void ABRechnung()
         {
             Thread t = new Thread(() =>
