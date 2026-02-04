@@ -18,7 +18,7 @@ namespace WtmZvt
 {
     public partial class Statusmeldung : Form
     {
-        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetLogger("ZVTLogger");
 
         //OFF = Offline     -> Login, Betrag, Logout                -> Terminal wieder offline
         //ONL = Online      -> Login (falls offline), Betrag        -> Terminal betriebsbereit, manuelles ausloggen
@@ -400,6 +400,8 @@ namespace WtmZvt
 
     class MyMessageListener : PayMessageListener
     {
+        private static readonly NLog.Logger _logger = NLog.LogManager.GetLogger(nameof(MyMessageListener));
+
         private Label lbl_Status;
         private Button btn_OK;
 
@@ -407,25 +409,25 @@ namespace WtmZvt
         {
             set
             {
-                Console.WriteLine("+++++intermediate message+++++");
-                Console.WriteLine(value);
-                Console.WriteLine("-----intermediate message-----");
+                _logger.Info("+++++intermediate message+++++");
+                _logger.Info(value);
+                _logger.Info("-----intermediate message-----");
             }
         }
         public string FinalMessage
         {
             set
             {
-                Console.WriteLine("+++++final message+++++");
-                Console.WriteLine(value);
-                Console.WriteLine("-----final message-----");
+                _logger.Info("+++++final message+++++");
+                _logger.Info(value);
+                _logger.Info("-----final message-----");
             }
         }
 
-        public MyMessageListener(Label _lbl, Button _OK)
+        public MyMessageListener(Label lbl, Button OK)
         {
-            lbl_Status = _lbl;
-            btn_OK = _OK;
+            lbl_Status = lbl;
+            btn_OK = OK;
         }
 
         public void setReceiptMessage(string message, short receiptType)
@@ -433,43 +435,43 @@ namespace WtmZvt
             switch (receiptType)
             {
                 case (short)ReceiptType.CUSTOMER:
-                    Console.WriteLine("+++++customer receipt+++++");
-                    Console.WriteLine(message);
-                    Console.WriteLine("-----customer receipt-----");
+                    _logger.Info("+++++customer receipt+++++");
+                    _logger.Info(message);
+                    _logger.Info("-----customer receipt-----");
                     break;
                 case (short)ReceiptType.MERCHANT:
-                    Console.WriteLine("+++++merchant receipt+++++");
-                    Console.WriteLine(message);
-                    Console.WriteLine("-----merchant receipt-----");
+                    _logger.Info("+++++merchant receipt+++++");
+                    _logger.Info(message);
+                    _logger.Info("-----merchant receipt-----");
                     break;
                 case (short)ReceiptType.END_OF_DAY:
-                    Console.WriteLine("+++++end of day receipt+++++");
-                    Console.WriteLine(message);
-                    Console.WriteLine("-----end of day receipt-----");
+                    _logger.Info("+++++end of day receipt+++++");
+                    _logger.Info(message);
+                    _logger.Info("-----end of day receipt-----");
                     break;
                 case (short)ReceiptType.JOURNAL:
-                    Console.WriteLine("+++++journal receipt+++++");
-                    Console.WriteLine(message);
-                    Console.WriteLine("-----journal receipt-----");
+                    _logger.Info("+++++journal receipt+++++");
+                    _logger.Info(message);
+                    _logger.Info("-----journal receipt-----");
                     break;
                 case (short)ReceiptType.LAST:
-                    Console.WriteLine("+++++last receipt+++++");
-                    Console.WriteLine(message);
-                    Console.WriteLine("-----last receipt-----");
+                    _logger.Info("+++++last receipt+++++");
+                    _logger.Info(message);
+                    _logger.Info("-----last receipt-----");
                     break;
                 case (short)ReceiptType.RECONCILIATION:
-                    Console.WriteLine("+++++reconciliation receipt+++++");
-                    Console.WriteLine(message);
-                    Console.WriteLine("-----reconciliation receipt-----");
+                    _logger.Info("+++++reconciliation receipt+++++");
+                    _logger.Info(message);
+                    _logger.Info("-----reconciliation receipt-----");
                     break;
             }
         }
 
         public void setDisplayMessage(string message, int code)
         {
-            Console.WriteLine("+++++display message (" + code + ")+++++");
-            Console.WriteLine(message);
-            Console.WriteLine("-----display message (" + code + ")-----");
+            _logger.Info("+++++display message (" + code + ")+++++");
+            _logger.Info(message);
+            _logger.Info("-----display message (" + code + ")-----");
 
             //Zahlung erfolgreich
             if (message == "Zahlung erfolgt " || message == "Kassenschnitt ")
