@@ -5,13 +5,14 @@
 // Author: Romana Pollak
 //--------------------
 
+using de.luis.kioskComponents.ePayment;
+using de.luis.kioskComponents.ePayment.exception;
 using System;
 using System.Drawing;
 using System.IO;
+using System.Runtime.Remoting.Messaging;
 using System.Threading;
 using System.Windows.Forms;
-using de.luis.kioskComponents.ePayment;
-using de.luis.kioskComponents.ePayment.exception;
 
 namespace WtmZvt
 {
@@ -139,7 +140,7 @@ namespace WtmZvt
                 MessageBox.Show("Config-Datei fehlt oder falscher Pfad!");
                 throw new Exception("Config-Datei fehlt oder falscher Pfad!");
             }
-            
+
             // create/read configuration from a configuration file
             PayConfiguration config = new PayConfiguration(filename);
             return config;
@@ -161,7 +162,7 @@ namespace WtmZvt
                      // create/read configuration from a configuration file
                      PayConfiguration config = createConfigFromFile(_configPath);
                      Logger.Debug("Config loaded.");
-                     
+
                      // start a new session
                      PaySession session = new PaySession();
                      Logger.Debug("Session created.");
@@ -170,7 +171,7 @@ namespace WtmZvt
                      MyMessageListener msgList = new MyMessageListener(lbl_Status, btn_OK);
                      Logger.Debug("MyMessageListener created.");
 
-                     session.setListener(msgList);
+                     session.Listener = msgList;
                      Logger.Debug("Listen to Session.");
 
                      // login (this is always the first communication to the EFT)
@@ -187,7 +188,7 @@ namespace WtmZvt
                          // Then we start the authorisation of the card
 
                          PayTransaction transaction = CreatePayTransaction(media);
-                         
+
 
                          // When we are here, the given card was accepted. We commit the transaction.
                          // If transaction is null, the device doesn't support commit and we are finished.
@@ -201,9 +202,9 @@ namespace WtmZvt
                      finally
                      {
                          PayResult result = new PayResult();
-                         
+
                          Logger.Debug("GetCustomerReceipt");
-                         string Custreceitpt = result.getCustomerReceipt();
+                         string Custreceitpt = result.CustomerReceipt;
 
                          // logout at last
                          session.logout();
@@ -236,9 +237,9 @@ namespace WtmZvt
                     // we define a message listener for events (optional)
                     MyMessageListener msgList = new MyMessageListener(lbl_Status, btn_OK);
 
-                    session.setListener(msgList);
+                    session.Listener = msgList;
 
-                    if (!session.isLoggedIn())
+                    if (!session.LoggedIn)
                     {
                         // login (this is always the first communication to the EFT)
                         _terminal = session.login(config);
@@ -292,7 +293,7 @@ namespace WtmZvt
                     // we define a message listener for events (optional)
                     MyMessageListener msgList = new MyMessageListener(lbl_Status, btn_OK);
 
-                    session.setListener(msgList);
+                    session.Listener = msgList;
 
                     // login (this is always the first communication to the EFT)
                     _terminal = session.login(config);
@@ -319,7 +320,7 @@ namespace WtmZvt
 
         private PayTransaction CreatePayTransaction(PayMedia media)
         {
-            short payType = PayTerminal.__Fields.PAY_TYPE_AUTOMATIC;
+            short payType = 0; //0 = alle Zahlarten zulassen
             Logger.Debug($"Start transaction with terminal: [{_amount}], [{payType}], [{media}]");
             PayTransaction transaction = _terminal.payment(_amount, payType, 30, new ProductCategory[] { }, media);
             Logger.Debug("Transaction created.");
@@ -342,7 +343,7 @@ namespace WtmZvt
                     // we define a message listener for events (optional)
                     MyMessageListener msgList = new MyMessageListener(lbl_Status, btn_OK);
 
-                    session.setListener(msgList);
+                    session.Listener = msgList;
 
                     // login (this is always the first communication to the EFT)
                     _terminal = session.login(config);
@@ -402,49 +403,69 @@ namespace WtmZvt
         private Label lbl_Status;
         private Button btn_OK;
 
+        public string IntermediateMessage
+        {
+            set
+            {
+                Console.WriteLine("+++++intermediate message+++++");
+                Console.WriteLine(value);
+                Console.WriteLine("-----intermediate message-----");
+            }
+        }
+        public string FinalMessage
+        {
+            set
+            {
+                Console.WriteLine("+++++final message+++++");
+                Console.WriteLine(value);
+                Console.WriteLine("-----final message-----");
+            }
+        }
+
         public MyMessageListener(Label _lbl, Button _OK)
         {
             lbl_Status = _lbl;
             btn_OK = _OK;
         }
 
-        public void setIntermediateMessage(String message)
-        {
-            Console.WriteLine("+++++intermediate message+++++");
-            Console.WriteLine(message);
-            Console.WriteLine("-----intermediate message-----");
-        }
-
-        public void setFinalMessage(String message)
-        {
-            Console.WriteLine("+++++final message+++++");
-            Console.WriteLine(message);
-            Console.WriteLine("-----final message-----");
-        }
-
-        public void setReceiptMessage(String message, short receiptType)
+        public void setReceiptMessage(string message, short receiptType)
         {
             switch (receiptType)
             {
-                case PayTerminal.__Fields.RECEIPT_TYPE_CUSTOMER:
+                case (short)ReceiptType.CUSTOMER:
                     Console.WriteLine("+++++customer receipt+++++");
                     Console.WriteLine(message);
                     Console.WriteLine("-----customer receipt-----");
                     break;
-                case PayTerminal.__Fields.RECEIPT_TYPE_MERCHANT:
+                case (short)ReceiptType.MERCHANT:
                     Console.WriteLine("+++++merchant receipt+++++");
                     Console.WriteLine(message);
                     Console.WriteLine("-----merchant receipt-----");
                     break;
-                case PayTerminal.__Fields.RECEIPT_TYPE_ADMINISTRATOR:
-                    Console.WriteLine("+++++administrator receipt+++++");
+                case (short)ReceiptType.END_OF_DAY:
+                    Console.WriteLine("+++++end of day receipt+++++");
                     Console.WriteLine(message);
-                    Console.WriteLine("-----administrator receipt-----");
+                    Console.WriteLine("-----end of day receipt-----");
+                    break;
+                case (short)ReceiptType.JOURNAL:
+                    Console.WriteLine("+++++journal receipt+++++");
+                    Console.WriteLine(message);
+                    Console.WriteLine("-----journal receipt-----");
+                    break;
+                case (short)ReceiptType.LAST:
+                    Console.WriteLine("+++++last receipt+++++");
+                    Console.WriteLine(message);
+                    Console.WriteLine("-----last receipt-----");
+                    break;
+                case (short)ReceiptType.RECONCILIATION:
+                    Console.WriteLine("+++++reconciliation receipt+++++");
+                    Console.WriteLine(message);
+                    Console.WriteLine("-----reconciliation receipt-----");
                     break;
             }
         }
 
-        public void setDisplayMessage(String message, int code)
+        public void setDisplayMessage(string message, int code)
         {
             Console.WriteLine("+++++display message (" + code + ")+++++");
             Console.WriteLine(message);
