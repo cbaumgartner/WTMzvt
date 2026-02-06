@@ -18,7 +18,7 @@ namespace WtmZvt
 {
     public partial class Statusmeldung : Form
     {
-        private static readonly NLog.Logger Logger = NLog.LogManager.GetLogger("ZVTLogger");
+        private static readonly NLog.Logger _logger = NLog.LogManager.GetLogger("ZVTLogger");
 
         //OFF = Offline     -> Login, Betrag, Logout                -> Terminal wieder offline
         //ONL = Online      -> Login (falls offline), Betrag        -> Terminal betriebsbereit, manuelles ausloggen
@@ -56,7 +56,7 @@ namespace WtmZvt
 
         private void Statusmeldung_Load(object sender, EventArgs e)
         {
-            Logger.Debug("Startup ZVT");
+            _logger.Debug("Startup ZVT");
             try
             {
                 if ((ModifierKeys & Keys.Shift) == 0)
@@ -87,19 +87,19 @@ namespace WtmZvt
                 {
                     case Funktionstyp.OFF:
                         //lbl_Status.Text = "FUNKTION OFFLINE!!!";
-                        Logger.Info("Funktionstyp.OFF");
+                        _logger.Info("Funktionstyp.OFF");
                         OFFline();
                         break;
 
                     case Funktionstyp.ONL:
                         //lbl_Status.Text = "FUNKTION ONLINE!!!";
-                        Logger.Info("Funktionstyp.ON");
+                        _logger.Info("Funktionstyp.ON");
                         ONLine();
                         break;
 
                     case Funktionstyp.OUT:
                         //lbl_Status.Text = "FUNKTION LOGOUT!!!";
-                        Logger.Info("Funktionstyp.OUT");
+                        _logger.Info("Funktionstyp.OUT");
                         LogOUT();
                         lbl_Status.Text = "manuelles Logout!";
                         btn_OK.Enabled = true;
@@ -107,13 +107,13 @@ namespace WtmZvt
 
                     case Funktionstyp.STO:
                         //lbl_Status.Text = "FUNKTION STORNO!!!";
-                        Logger.Info("Funktionstyp.STO");
+                        _logger.Info("Funktionstyp.STO");
                         STOrno();
                         break;
 
                     case Funktionstyp.ABR:
                         //lbl_Status.Text = "FUNKTION ABRECHNUNG!!!";
-                        Logger.Info("Funktionstyp.ABR");
+                        _logger.Info("Funktionstyp.ABR");
                         ABRechnung();
                         break;
 
@@ -127,10 +127,10 @@ namespace WtmZvt
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                _logger.Error(ex);
                 Application.Exit();
             }
-            Logger.Debug("ZVT loaded");
+            _logger.Debug("ZVT loaded");
         }
 
         static PayConfiguration createConfigFromFile(String filename)
@@ -157,26 +157,26 @@ namespace WtmZvt
              {
                  try
                  {
-                     Logger.Debug("Start Offline");
+                     _logger.Debug("Start Offline");
                      //--------------
                      // create/read configuration from a configuration file
                      PayConfiguration config = createConfigFromFile(_configPath);
-                     Logger.Debug("Config loaded.");
+                     _logger.Debug("Config loaded.");
 
                      // start a new session
                      PaySession session = new PaySession();
-                     Logger.Debug("Session created.");
+                     _logger.Debug("Session created.");
 
                      // we define a message listener for events (optional)
-                     MyMessageListener msgList = new MyMessageListener(lbl_Status, btn_OK);
-                     Logger.Debug("MyMessageListener created.");
+                     WtmMessageListener msgList = new WtmMessageListener(lbl_Status, btn_OK);
+                     _logger.Debug("MyMessageListener created.");
 
                      session.Listener = msgList;
-                     Logger.Debug("Listen to Session.");
+                     _logger.Debug("Listen to Session.");
 
                      // login (this is always the first communication to the EFT)
                      _terminal = session.login(config);
-                     Logger.Debug("Logged on to Session");
+                     _logger.Debug("Logged on to Session");
 
                      try
                      {
@@ -184,37 +184,40 @@ namespace WtmZvt
 
                          // First we create the result object PayMedia
                          PayMedia media = new PayMedia();
-                         Logger.Debug("PayMedia created.");
+                         _logger.Debug("PayMedia created.");
                          // Then we start the authorisation of the card
 
                          PayTransaction transaction = CreatePayTransaction(media);
-
 
                          // When we are here, the given card was accepted. We commit the transaction.
                          // If transaction is null, the device doesn't support commit and we are finished.
                          if (transaction != null)
                          {
-                             Logger.Debug("Commit transaction");
+                             _logger.Debug("Commit transaction");
                              transaction.commit(media);
-                             Logger.Debug("Transaction committed.");
+                             _logger.Debug("Transaction committed.");
                          }
                      }
                      finally
                      {
                          PayResult result = new PayResult();
 
-                         Logger.Debug("GetCustomerReceipt");
-                         string Custreceitpt = result.CustomerReceipt;
+                         _logger.Debug("GetCustomerReceipt");
+                         string customerReceipt = result.CustomerReceipt;
+                         _logger.Info($"Customer receipt: {customerReceipt}");
 
                          // logout at last
                          session.logout();
-                         Logger.Debug("Logout from Session");
+                         _logger.Debug("Logout from Session");
+
+                         _terminal.logout();
+                         _logger.Debug("Logout from Terminal");
                      }
                  }
                  catch (PayException ex)
                  {
                      // catch all PayExceptions and write to console
-                     Logger.Error(ex);
+                     _logger.Error(ex);
                  }
              });
             t.Start();
@@ -235,7 +238,7 @@ namespace WtmZvt
                     PaySession session = new PaySession();
 
                     // we define a message listener for events (optional)
-                    MyMessageListener msgList = new MyMessageListener(lbl_Status, btn_OK);
+                    WtmMessageListener msgList = new WtmMessageListener(lbl_Status, btn_OK);
 
                     session.Listener = msgList;
 
@@ -272,7 +275,7 @@ namespace WtmZvt
                 catch (PayException ex)
                 {
                     // catch all PayExceptions and write to console
-                    Logger.Error(ex);
+                    _logger.Error(ex);
                 }
             });
             t.Start();
@@ -291,7 +294,7 @@ namespace WtmZvt
                     PaySession session = new PaySession();
 
                     // we define a message listener for events (optional)
-                    MyMessageListener msgList = new MyMessageListener(lbl_Status, btn_OK);
+                    WtmMessageListener msgList = new WtmMessageListener(lbl_Status, btn_OK);
 
                     session.Listener = msgList;
 
@@ -305,7 +308,7 @@ namespace WtmZvt
                 catch (PayException ex)
                 {
                     // catch all PayExceptions and write to console
-                    Logger.Error(ex);
+                    _logger.Error(ex);
                 }
             });
             t.Start();
@@ -321,9 +324,9 @@ namespace WtmZvt
         private PayTransaction CreatePayTransaction(PayMedia media)
         {
             short payType = 0; //0 = alle Zahlarten zulassen
-            Logger.Debug($"Start transaction with terminal: [{_amount}], [{payType}], [{media}]");
+            _logger.Debug($"Start transaction with terminal: [{_amount}], [{payType}], [{media}]");
             PayTransaction transaction = _terminal.payment(_amount, payType, 30, new ProductCategory[] { }, media);
-            Logger.Debug("Transaction created.");
+            _logger.Debug($"Transaction created [IsOpen: {transaction?.Open}; IsCommitted: {transaction?.Committed}].");
 
             return transaction;
         }
@@ -341,7 +344,7 @@ namespace WtmZvt
                     PaySession session = new PaySession();
 
                     // we define a message listener for events (optional)
-                    MyMessageListener msgList = new MyMessageListener(lbl_Status, btn_OK);
+                    WtmMessageListener msgList = new WtmMessageListener(lbl_Status, btn_OK);
 
                     session.Listener = msgList;
 
@@ -358,7 +361,7 @@ namespace WtmZvt
                 catch (PayException ex)
                 {
                     // catch all PayExceptions and write to console
-                    Logger.Error(ex);
+                    _logger.Error(ex);
                 }
             });
             t.Start();
@@ -388,7 +391,7 @@ namespace WtmZvt
                 Properties.Settings.Default.Save();
             }
 
-            Logger.Debug("Close ZVT");
+            _logger.Debug("Close ZVT");
         }
     }
 
@@ -398,9 +401,9 @@ namespace WtmZvt
 
 
 
-    class MyMessageListener : PayMessageListener
+    class WtmMessageListener : PayMessageListener
     {
-        private static readonly NLog.Logger _logger = NLog.LogManager.GetLogger(nameof(MyMessageListener));
+        private static readonly NLog.Logger _logger = NLog.LogManager.GetLogger(nameof(WtmMessageListener));
 
         private Label lbl_Status;
         private Button btn_OK;
@@ -424,7 +427,7 @@ namespace WtmZvt
             }
         }
 
-        public MyMessageListener(Label lbl, Button OK)
+        public WtmMessageListener(Label lbl, Button OK)
         {
             lbl_Status = lbl;
             btn_OK = OK;
