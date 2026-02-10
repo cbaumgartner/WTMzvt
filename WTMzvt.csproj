@@ -39,9 +39,9 @@
     <Reference Include="log4net">
       <HintPath>lib\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="LUIS_ePayment.net, Version=7.3.2406.13, Culture=neutral, PublicKeyToken=07b789771f1c0a76, processorArchitecture=MSIL">
+    <Reference Include="LUIS_ePayment.net, Version=7.3.2406.13, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Playground\ZVT_DLL_LUISpayment\07.03\dotnet\LUIS_ePayment4N_07.03.2406.13\LUIS_ePayment4N_07.03.2406.13\LUIS_ePayment.net.dll</HintPath>
+      <HintPath>lib\LUIS_ePayment.net.dll</HintPath>
     </Reference>
     <Reference Include="NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <HintPath>packages\NLog.6.0.7\lib\net46\NLog.dll</HintPath>
