@@ -326,7 +326,14 @@ namespace WtmZvt
             short payType = 0; //0 = alle Zahlarten zulassen
             _logger.Debug($"Start transaction with terminal: [{_amount}], [{payType}], [{media}]");
             PayTransaction transaction = _terminal.payment(_amount, payType, 30, new ProductCategory[] { }, media);
-            _logger.Debug($"Transaction created [IsOpen: {transaction?.Open}; IsCommitted: {transaction?.Committed}].");
+            if (transaction is null)
+            {
+                _logger.Warn("Transaction is null. This means that the terminal doesn't support commit.");
+            }
+            else
+            {
+                _logger.Debug($"Transaction created [IsOpen: {transaction.Open} IsCommitted: {transaction.Committed}].");
+            }
 
             return transaction;
         }
