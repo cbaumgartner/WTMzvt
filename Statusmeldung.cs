@@ -187,7 +187,7 @@ namespace WtmZvt
                          _logger.Debug("PayMedia created.");
                          // Then we start the authorisation of the card
 
-                         PayTransaction transaction = CreatePayTransaction(media);
+                         PayTransaction transaction = CreatePayTransaction(media, session);
 
                          // When we are here, the given card was accepted. We commit the transaction.
                          // If transaction is null, the device doesn't support commit and we are finished.
@@ -258,7 +258,7 @@ namespace WtmZvt
 
                         // Then we start the authorisation of the card
 
-                        PayTransaction transaction = CreatePayTransaction(media);
+                        PayTransaction transaction = CreatePayTransaction(media, session);
 
                         // When we are here, the given card was accepted. We commit the transaction.
                         // If transaction is null, the device doesn't support commit and we are finished.
@@ -321,14 +321,16 @@ namespace WtmZvt
             //terminal.reversal(_amount, payType, media); //Storno
         }
 
-        private PayTransaction CreatePayTransaction(PayMedia media)
+        private PayTransaction CreatePayTransaction(PayMedia media, PaySession session)
         {
             short payType = 0; //0 = alle Zahlarten zulassen
             _logger.Debug($"Start transaction with terminal: [{_amount}], [{payType}], [{media}]");
             PayTransaction transaction = _terminal.payment(_amount, payType, 30, new ProductCategory[] { }, media);
             if (transaction is null)
             {
-                _logger.Warn("Transaction is null. This means that the terminal doesn't support commit.");
+                _logger.Warn("Transaction is null");
+
+                session.Listener.setDisplayMessage("Zahlung erfolgt ", 0);
             }
             else
             {
@@ -435,34 +437,22 @@ namespace WtmZvt
             switch (receiptType)
             {
                 case (short)ReceiptType.CUSTOMER:
-                    _logger.Info("+++++customer receipt+++++");
-                    _logger.Info(message);
-                    _logger.Info("-----customer receipt-----");
+                    _logger.Info($"Customer receipt: [{message}]");
                     break;
                 case (short)ReceiptType.MERCHANT:
-                    _logger.Info("+++++merchant receipt+++++");
-                    _logger.Info(message);
-                    _logger.Info("-----merchant receipt-----");
+                    _logger.Info($"Merchant receipt: [{message}]");
                     break;
                 case (short)ReceiptType.END_OF_DAY:
-                    _logger.Info("+++++end of day receipt+++++");
-                    _logger.Info(message);
-                    _logger.Info("-----end of day receipt-----");
+                    _logger.Info($"End of day receipt: [{message}]");
                     break;
                 case (short)ReceiptType.JOURNAL:
-                    _logger.Info("+++++journal receipt+++++");
-                    _logger.Info(message);
-                    _logger.Info("-----journal receipt-----");
+                    _logger.Info($"Journal receipt: [{message}]");
                     break;
                 case (short)ReceiptType.LAST:
-                    _logger.Info("+++++last receipt+++++");
-                    _logger.Info(message);
-                    _logger.Info("-----last receipt-----");
+                    _logger.Info($"Last receipt: [{message}]");
                     break;
                 case (short)ReceiptType.RECONCILIATION:
-                    _logger.Info("+++++reconciliation receipt+++++");
-                    _logger.Info(message);
-                    _logger.Info("-----reconciliation receipt-----");
+                    _logger.Info($"Reconciliation receipt: [{message}]");
                     break;
             }
         }
