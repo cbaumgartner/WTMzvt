@@ -417,21 +417,11 @@ namespace WtmZvt
 
         public string IntermediateMessage
         {
-            set
-            {
-                _logger.Info("+++++intermediate message+++++");
-                _logger.Info(value);
-                _logger.Info("-----intermediate message-----");
-            }
+            set => _logger.Info($"Intermediate message: {value}");
         }
         public string FinalMessage
         {
-            set
-            {
-                _logger.Info("+++++final message+++++");
-                _logger.Info(value);
-                _logger.Info("-----final message-----");
-            }
+            set => _logger.Info($"Final message: {value}");
         }
 
         public WtmMessageListener(Label lbl, Button OK)
@@ -479,9 +469,11 @@ namespace WtmZvt
 
         public void setDisplayMessage(string message, int code)
         {
-            _logger.Info("+++++display message (" + code + ")+++++");
-            _logger.Info(message);
-            _logger.Info("-----display message (" + code + ")-----");
+            _logger.Info($"Display message ({code}): {message}");
+            lbl_Status.Invoke((MethodInvoker)(() =>
+            {
+                lbl_Status.Text = message;
+            }));
 
             //Zahlung erfolgreich
             if (message == "Zahlung erfolgt " || message == "Kassenschnitt ")
@@ -510,11 +502,6 @@ namespace WtmZvt
                     lbl_Status.BackColor = Color.Red;
                 }));
             }
-
-            lbl_Status.Invoke((MethodInvoker)(() =>
-            {
-                lbl_Status.Text = message;
-            }));
         }
     }
 }
